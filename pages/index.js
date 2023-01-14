@@ -20,7 +20,7 @@ export default function Home() {
         <div className="grid sm: grid-cols-1 lg:grid-cols-4 gap-4">
           {cardsArray?.map((cards) => {
             return (
-              <SingleCard key={cards?.name} cards={cards} url={cards.url} refetch={refetch} />
+              <SingleCard key={cards?.name} id={cards?.name} cards={cards} url={cards.url} refetch={refetch} />
             );
           })}
         </div>
