@@ -12,6 +12,7 @@ function SingleCardTemplate() {
   const cookies = new Cookies();
   const [checkSingleStat, setcheckSingleStat] = useState(null);
   const [baseTotal, setBaseTotal] = useState(0);
+  const [ref, setRef] = useState();
   const [checkCharacteristics, setCheckCharacteristics] = useState([]);
 
   const [state, dispatch] = useReducer(postReducer, INITIAL_STATE);
@@ -23,19 +24,25 @@ function SingleCardTemplate() {
     }, setBaseTotal(base_total));
   }, []);
 
+  useEffect(() => {
+    if (router?.isReady && router?.query) {
+      const cardImage = router?.query?.image;
+      setRef(cardImage);
+    }
+  }, [router?.query, router?.isReady]);
+
   const goBack = () => {
-    cookies.remove('data');
     router.back()
   }
 
   return (
-    <div className="bg-dark h-screen">
+    <div className="bg-dark min-h-screen">
       <div className="sm: px-12 lg:pt-20">
         <h1 className="text-center mb-8 font-bold text-3xl text-darkGray">CARD STATISTICS</h1>
         <div className="flex justify-between">
           <div className="w-2/5 h-[498px] border border-solid border-grey rounded">
             <img
-              src={state?.pokemonImage}
+              src={ref}
               alt=""
               className="w-full h-5/6 object-cover"
             />
@@ -69,8 +76,8 @@ function SingleCardTemplate() {
             </div>
 
             {checkSingleStat !== null && (
-              <div className="">
-                <div className="border border-solid border-grey rounded w-[350px] min-h-[300px] px-5 py-6">
+              <div className="overscroll-contain">
+                <div className="overscroll-auto border border-solid border-grey rounded w-[350px] min-h-[500px] px-5 py-6">
                   <p className="text-grey">
                     Name:{" "}
                     <span className="font-bold">
@@ -87,14 +94,14 @@ function SingleCardTemplate() {
         </div>
       </div>
 
-      {/* <div className="flex justify-start mt-28 sm:px-12 lg:px-10">
+      <div className="flex justify-start pt-28 sm:px-12 lg:px-10">
         <button
           className="cursor-pointer bg-blue py-2 px-8 rounded text-white text-xl"
           onClick={goBack }
         >
           Back
         </button>
-      </div> */}
+      </div>
     </div>
   );
 }

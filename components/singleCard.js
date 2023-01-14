@@ -24,22 +24,23 @@ function SingleCard({ cards, key, url }) {
   }, []);
 
   const openSingleCard = (cardImage, cardStat) => {
-    // window.location.reload();
     cookies.set("image", cardImage);
     cookies.set("stats", JSON.stringify(cardStat));
     dispatch({ type: "SET_IMAGE", payload: cardImage });
     dispatch({ type: "SET_CARD_STATS", payload: cardStat });
-      router.push("/single-card");
-
- 
+    router.push({ pathname: "/single-card", query: { image: cardImage, stats: cardStat } });
   };
   return (
     <div
       key={key}
       className="w-80 h-96 border border-solid border-grey mb-3 hover:bg-offGray group cursor-pointer rounded"
-      onClick={() => openSingleCard(cardDetails?.sprites?.back_shiny, cardDetails?.stats)}
+      onClick={() =>
+        openSingleCard(cardDetails?.sprites?.back_shiny, cardDetails?.stats)
+      }
     >
-      <p className="text-center pt-4 text-lg text-white group-hover:text-dark">{cards?.name}</p>
+      <p className="text-center pt-4 text-lg text-white group-hover:text-dark">
+        {cards?.name}
+      </p>
       <img
         src={cardDetails?.sprites?.back_shiny}
         alt=""
