@@ -27,8 +27,7 @@ function SingleCard({ cards, key, url }) {
     cookies.set("image", cardImage);
     cookies.set("stats", JSON.stringify(cardStat));
     dispatch({ type: "SET_IMAGE", payload: cardImage });
-    dispatch({ type: "SET_CARD_STATS", payload: cardStat });
-    router.push({ pathname: "/single-card", query: { image: cardImage, stats: cardStat } });
+    router.push({ pathname: "/single-card", query: { image: cardImage } });
   };
   return (
     <div
