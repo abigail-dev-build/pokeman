@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
-import React, { useState, useReducer, useContext, useEffect } from "react";
-import { INITIAL_STATE, postReducer } from "../postReducer";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Cookies from 'universal-cookie'
@@ -15,11 +14,11 @@ function SingleCardTemplate() {
   const [ref, setRef] = useState();
   const [checkCharacteristics, setCheckCharacteristics] = useState([]);
 
-  const [state, dispatch] = useReducer(postReducer, INITIAL_STATE);
+  const stats = cookies.get('stats')
 
   let base_total = 0;
   useEffect(() => {
-    state?.stats?.map((obj) => {
+    stats?.map((obj) => {
       base_total += obj.base_stat;
     }, setBaseTotal(base_total));
   }, []);
@@ -50,7 +49,7 @@ function SingleCardTemplate() {
           <div className="w-3/5 min-h-96 border border-solid border-grey ml-12 rounded px-12 py-12 flex justify-between">
             <div>
               <h3 className="mb-6 text-grey">Base Stat: {baseTotal}</h3>
-              {state?.stats?.map((newObj, index) => {
+              {stats?.map((newObj, index) => {
                 const getStat = () => {
                   axios({
                     method: "get",
