@@ -35,18 +35,18 @@ function SingleCardTemplate() {
   }
 
   return (
-    <div className="bg-dark min-h-screen">
-      <div className="sm: px-12 lg:pt-20">
+    <div className="min-h-screen sm: px-12 lg:px-10 pt-10 bg-dark">
+      <div className="sm:px-12 lg:pt-20">
         <h1 className="text-center mb-8 font-bold text-3xl text-darkGray">CARD STATISTICS</h1>
-        <div className="flex justify-between">
-          <div className="w-2/5 h-[498px] border border-solid border-grey rounded">
+        <div className="lg:flex sm:block lg:justify-between">
+          <div className="lg:w-2/5 sm:w-full h-[498px] mb-8 border border-solid border-grey rounded">
             <img
               src={ref}
               alt=""
               className="w-full h-5/6 object-cover"
             />
           </div>
-          <div className="w-3/5 min-h-96 border border-solid border-grey ml-12 rounded px-12 py-12 flex justify-between">
+          <div className="lg:w-3/5 sm:w-full min-h-96 border border-solid border-grey lg:ml-12 sm:my-10 rounded px-12 lg:py-12 flex justify-between">
             <div>
               <h3 className="mb-6 text-grey">Base Stat: {baseTotal}</h3>
               {stats?.map((newObj, index) => {
